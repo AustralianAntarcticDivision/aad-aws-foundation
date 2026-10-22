@@ -46,9 +46,10 @@ aws s3api put-bucket-versioning --bucket aad-aws-foundation-terraform-state \
   --versioning-configuration Status=Enabled
 ```
 
-Then:
+Then, with credentials for the AAD account (Terraform 1.5's S3 backend can't read SSO profiles directly):
 
 ```bash
+eval "$(aws configure export-credentials --profile aad --format env)"
 cd terraform
 terraform init
 terraform plan
